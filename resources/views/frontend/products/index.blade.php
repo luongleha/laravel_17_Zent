@@ -15,80 +15,103 @@ Shop
 @endsection
 
 @section('content')
-   <!-- Single Product -->
+<!-- Single Product -->
 
-    <div class="single_product">
-        <div class="container">
-            <div class="row">
+<div class="single_product">
+    <div class="container">
+        <div class="row">
 
-                <!-- Images -->
-                <div class="col-lg-2 order-lg-1 order-2">
-                    <ul class="image_list">
-                        <li data-image="/frontend/images/single_4.jpg"><img src="/frontend/images/single_4.jpg" alt=""></li>
-                        <li data-image="/frontend/images/single_2.jpg"><img src="/frontend/images/single_2.jpg" alt=""></li>
-                        <li data-image="/frontend/images/single_3.jpg"><img src="/frontend/images/single_3.jpg" alt=""></li>
-                    </ul>
+            <!-- Images -->
+            <div class="col-lg-2 order-lg-1 order-2">
+                <ul class="image_list">
+                    <li data-image="/frontend/images/single_4.jpg">
+                        @foreach($path as $key => $image)
+                        @if($key == 1)
+                            <img src="/{{$image->path}}" alt="">
+                        @endif
+                        @endforeach
+                    </li>
+                    <li data-image="/frontend/images/single_2.jpg">
+                        @foreach($path as $key => $image)
+                        @if($key == 2)
+                            <img src="/{{$image->path}}" alt="">
+                        @endif
+                        @endforeach
+                    </li>
+                    <li data-image="/frontend/images/single_3.jpg">
+                        @foreach($path as $key => $image)
+                        @if($key == 3)
+                            <img src="/{{$image->path}}" alt="">
+                        @endif
+                    @endforeach</li>
+                </ul>
+            </div>
+
+            <!-- Selected Image -->
+            <div class="col-lg-5 order-lg-2 order-1">
+                <div class="image_selected">
+                    @foreach($path as $key => $image)
+                    @if($key == 0)
+                        <img src="/{{$image->path}}" alt="">
+                    @endif
+                    @endforeach
                 </div>
+            </div>
 
-                <!-- Selected Image -->
-                <div class="col-lg-5 order-lg-2 order-1">
-                    <div class="image_selected"><img src="/storage/{{ $images[0]->path }}" alt=""></div>
-                </div>
+            <!-- Description -->
+            <div class="col-lg-5 order-3">
+                <div class="product_description">
+                    <div class="product_category">{{$products->category->name}}</div>
+                    <div class="product_name">{{$products->name}}</div>
+                    <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
+                    <div class="product_text"><p>{{$products->content}}</p></div>
+                    <div class="order_info d-flex flex-row">
+                        <form action="#">
+                            <div class="clearfix" style="z-index: 1000;">
 
-                <!-- Description -->
-                <div class="col-lg-5 order-3">
-                    <div class="product_description">
-                        <div class="product_category">{{$product->category->name}}</div>
-                        <div class="product_name">{{$product->name}}</div>
-                        <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                        <div class="product_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fermentum. laoreet turpis, nec sollicitudin dolor cursus at. Maecenas aliquet, dolor a faucibus efficitur, nisi tellus cursus urna, eget dictum lacus turpis.</p></div>
-                        <div class="order_info d-flex flex-row">
-                            <form action="#">
-                                <div class="clearfix" style="z-index: 1000;">
-
-                                    <!-- Product Quantity -->
-                                    <div class="product_quantity clearfix">
-                                        <span>Quantity: </span>
-                                        <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-                                        <div class="quantity_buttons">
-                                            <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
-                                            <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
-                                        </div>
+                                <!-- Product Quantity -->
+                                <div class="product_quantity clearfix">
+                                    <span>Quantity: </span>
+                                    <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+                                    <div class="quantity_buttons">
+                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
+                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
                                     </div>
-
-                                    <!-- Product Color -->
-                                    <ul class="product_color">
-                                        <li>
-                                            <span>Color: </span>
-                                            <div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
-                                            <div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
-
-                                            <ul class="color_list">
-                                                <li><div class="color_mark" style="background: #999999;"></div></li>
-                                                <li><div class="color_mark" style="background: #b19c83;"></div></li>
-                                                <li><div class="color_mark" style="background: #000000;"></div></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-
                                 </div>
 
-                                <div class="product_price">{{$product->origin_price}}</div>
-                                <div class="button_container">
-                                    <button type="button" class="button cart_button">Add to Cart</button>
-                                    <div class="product_fav"><i class="fas fa-heart"></i></div>
-                                </div>
+                                <!-- Product Color -->
+                                <ul class="product_color">
+                                    <li>
+                                        <span>Color: </span>
+                                        <div class="color_mark_container"><div id="selected_color" class="color_mark"></div></div>
+                                        <div class="color_dropdown_button"><i class="fas fa-chevron-down"></i></div>
 
-                            </form>
-                        </div>
+                                        <ul class="color_list">
+                                            <li><div class="color_mark" style="background: #999999;"></div></li>
+                                            <li><div class="color_mark" style="background: #b19c83;"></div></li>
+                                            <li><div class="color_mark" style="background: #000000;"></div></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="product_price">{{$products->origin_price}}</div>
+                            <div class="button_container">
+                                <button type="button" class="button cart_button">Add to Cart</button>
+                                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
+</div>
 
-    <!-- Recently Viewed -->
+<!-- Recently Viewed -->
 
     <div class="viewed">
         <div class="container">
@@ -109,15 +132,15 @@ Shop
                         <div class="owl-carousel owl-theme viewed_slider">
 
                             <!-- Recently Viewed Item -->
-                            @foreach($products as $product)
+                            @foreach($product2 as $product)
                             <div class="owl-item">
                                 <div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                     <div class="viewed_image">
                                         @foreach($product->images as $key => $image)
                                             @if($key == 0)
-                                                <img src="/{{$image['path']}}" alt="">
+                                        <img style="max-width: 75%" src="{{$image['path']}}" alt="">
                                             @endif
-                                        @endforeach
+                                            @endforeach
                                     </div>
                                     <div class="viewed_content text-center">
                                         <div class="viewed_price">{{number_format($product->origin_price)}} VND</div>
@@ -196,18 +219,18 @@ Shop
             </div>
         </div>
     </div>
-@endsection
+    @endsection
 
-@section('link-js')
-<script src="/frontend/js/jquery-3.3.1.min.js"></script>
-<script src="/frontend/styles/bootstrap4/popper.js"></script>
-<script src="/frontend/styles/bootstrap4/bootstrap.min.js"></script>
-<script src="/frontend/plugins/greensock/TweenMax.min.js"></script>
-<script src="/frontend/plugins/greensock/TimelineMax.min.js"></script>
-<script src="/frontend/plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="/frontend/plugins/greensock/animation.gsap.min.js"></script>
-<script src="/frontend/plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="/frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="/frontend/plugins/easing/easing.js"></script>
-<script src="/frontend/js/product_custom.js"></script>
-@endsection
+    @section('link-js')
+    <script src="/frontend/js/jquery-3.3.1.min.js"></script>
+    <script src="/frontend/styles/bootstrap4/popper.js"></script>
+    <script src="/frontend/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="/frontend/plugins/greensock/TweenMax.min.js"></script>
+    <script src="/frontend/plugins/greensock/TimelineMax.min.js"></script>
+    <script src="/frontend/plugins/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="/frontend/plugins/greensock/animation.gsap.min.js"></script>
+    <script src="/frontend/plugins/greensock/ScrollToPlugin.min.js"></script>
+    <script src="/frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="/frontend/plugins/easing/easing.js"></script>
+    <script src="/frontend/js/product_custom.js"></script>
+    @endsection

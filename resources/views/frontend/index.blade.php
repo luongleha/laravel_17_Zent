@@ -112,14 +112,18 @@ One Tech
 								<div class="owl-item deals_item">
 									<div class="deals_image">
                                         @foreach($product->images as $key => $image)
-                                            @if($key == 0)
-                                        <img style="max-width: 75%" src="{{$image['path']}}" alt="">
-                                            @endif
-                                            @endforeach
+                                                    @if($key == 0)
+                                                        <img src="/{{$image['path']}}" alt="">
+                                                    @endif
+                                                @endforeach
                                     </div>
 									<div class="deals_content">
 										<div class="deals_info_line d-flex flex-row justify-content-start">
-											<div class="deals_item_category"><a href="#">{{$product->category_id}}</a></div>
+											<div class="deals_item_category"><a href="#">
+												@foreach($product->category as $category)
+													{{$category['name']}}
+												@endforeach
+										</a></div>
 											<div class="deals_item_price_a ml-auto">{{number_format($product->origin_price)}} VND</div>
 										</div>
 										<div class="deals_info_line d-flex flex-row justify-content-start">
@@ -198,7 +202,7 @@ One Tech
                                                 </div>
 											<div class="product_content">
 												<div class="product_price discount">{{number_format($product->sale_price)}} VND <br> <span>{{number_format($product->origin_price)}} VND</span></div>
-												<div class="product_name"><div><a href="{{route('frontend.products.show', $product->slug)}}">{{$product->name}}</a></div></div>
+												<div class="product_name"><div><a href="{{route('frontend.products.show', $product->id)}}">{{$product->name}}</a></div></div>
 												<div class="product_extras">
 													<div class="product_color">
 														<input type="radio" checked name="product_color" style="background:#b19c83">

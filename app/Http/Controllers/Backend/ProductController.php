@@ -185,6 +185,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        // dd($product);
         $category = Category::find($product->category_id);
         $product_iamges = Product::with('images')->find($id);
         $path = $product_iamges->images;

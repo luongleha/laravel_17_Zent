@@ -63,7 +63,7 @@
 	    Route::get('/index', 'IndexController@index')->name('frontend.index');
 	    Route::group(['prefix' => 'products'], function(){
 	       Route::get('/', 'ProductController@index')->name('frontend.products.index');
-	       Route::get('/show/{id}', 'ProductController@show')->name('frontend.products.show');
+	       Route::get('/show/{id?}', 'ProductController@show')->name('frontend.products.show');
 	    });
 	    Route::group(['prefix' => 'shop'], function(){
 	        Route::get('/', 'ShopController@index')->name('frontend.shop.index');

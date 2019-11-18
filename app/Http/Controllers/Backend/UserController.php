@@ -105,9 +105,13 @@ class UserController extends Controller
         // $userInfo = $user->userInfo;
         // dd($userInfo);
 
-        $userInfo = UserInfo::find($id);
-        $user = $userInfo->user;
-        dd($user);
+        // $userInfo = UserInfo::find($id);
+        // $user = $userInfo->user;
+        // dd($user);
+        $user = User::find($id);
+        return view('backend.users.show')->with([
+            'user' => $user,
+    ]);
     }
 
     /**
@@ -130,12 +134,41 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $info_image = [];
+        if ($request->hasFile('image')){
+            $images = $request->file('image');
+            foreach ($images as $key => $image){
+
+//                cach 1
+//                $id = $key;
+//                $namefile = $id . '.png';
+
+//                cach2
+                $namefile = $image->getClientOriginalName();
+                $url = 'storage/user/' . $namefile;
+                Storage::disk('public')->putFileAs('user', $image, $namefile);
+                $info_image[] = [
+                    'url' => $url,
+                    'name' => $namefile
+                ];
+            }
+        }
+
         $name = $request->get('name');
         $email = $request->get('email');
+        // $is_admin = $request->get('is_admin');
+        $image = $request->get('image');
+
         $user = User::find($id);
         $user->name = $name;
         $user->email = $email;
+        // $user->is_admin = $is_admin;
+        $user->image = $image;
+        // dd($user);
+        // dd(1);
+
         $save = $user->save();
+
         if ($save) {
             $request->session()->flash('success_update', 'Cập nhật user thành công' . '<br>');
         } else {

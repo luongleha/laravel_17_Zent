@@ -24,21 +24,17 @@ class ProductController extends Controller
     //         'products' => $products
     //     ]);
     // }
-    public function show($slug) {
-        $product = Product::where('slug', $slug)->first();
-        $products = Product::get();
-        $product = Product::with('images')->where('slug', $slug)->first();
-        $images = $product->images;
-        // dd($images);
-        // foreach ($images as $image) {
-        //  dd($image);
-        // }
-        $category = Category::get();
+    public function show($id) {
+        $products = Product::find($id);
+        $product2 = Product::with('images')->paginate(15);
+        $category = Category::find($products->category_id);
+        $product_iamges = Product::with('images')->find($id);
+        $path = $product_iamges->images;
         return view('frontend.products.index')->with([
+            'product2' => $product2,
             'products' => $products,
-            'product' => $product,
             'category' => $category,
-            'images' => $images,
+            'path' => $path
         ]);
     }
 
