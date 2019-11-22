@@ -64,7 +64,7 @@ Shop
                     <div class="product_category">{{$products->category->name}}</div>
                     <div class="product_name">{{$products->name}}</div>
                     <div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                    <div class="product_text"><p>{{$products->content}}</p></div>
+                    <div class="product_text"><p>{!! $products->content !!}</p></div>
                     <div class="order_info d-flex flex-row">
                         <form action="#">
                             <div class="clearfix" style="z-index: 1000;">
@@ -96,9 +96,9 @@ Shop
 
                             </div>
 
-                            <div class="product_price">{{$products->origin_price}}</div>
+                            <div class="product_price">{{number_format($products->sale_price) . ' VND'}}</div>
                             <div class="button_container">
-                                <button type="button" class="button cart_button">Add to Cart</button>
+                                <a href="/online/cart/add/{{$products->id}}" class="product_cart_button btn btn-success">Add to Cart</a>
                                 <div class="product_fav"><i class="fas fa-heart"></i></div>
                             </div>
 

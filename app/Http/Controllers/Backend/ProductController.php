@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = Product::paginate(10);
         //        -----------su dung gates-----------
         $categories = Category::get();
 

@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\UserInfor;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
-class UserController extends Controller
+class UserInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,11 +21,11 @@ class UserController extends Controller
     public function index()
     {
         // $users = User::get();
-        $users = User::paginate(10);
+        $userinfo = UserInfo::paginate(15);
         // $users = User::simplePaginate(15);
 
-        return view('backend.users.index')->with([
-            'users' => $users
+        return view('backend.userinfo.index')->with([
+            'userinfo' => $userinfo
         ]);
     }
 
@@ -37,7 +37,7 @@ class UserController extends Controller
     public function create()
     {
         if (Gate::allows('view-dashboard')) {
-            return view('backend.users.create');
+            return view('backend.userinfo.create');
         }else{
             return abort(404);
         }
@@ -63,8 +63,8 @@ class UserController extends Controller
 
 //                cach2
                 $namefile = $image->getClientOriginalName();
-                $url = 'storage/user/' . $namefile;
-                Storage::disk('public')->putFileAs('user', $image, $namefile);
+                $url = 'storage/userinfo/' . $namefile;
+                Storage::disk('public')->putFileAs('userinfo', $image, $namefile);
                 $info_image[] = [
                     'url' => $url,
                     'name' => $namefile
@@ -75,22 +75,22 @@ class UserController extends Controller
             dd('khong co file');
         }
 
-        $user = new User();
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = bcrypt($request->password);
-        $user->is_admin = $request->get('is_admin');
-        $user->image = $url;
+        $userinfo = new UserInfo();
+        $userinfo->fullname = $request->get('fullname');
+        $userinfo->email = $request->get('email');
+        $userinfo->phone = $request->get('phone');
+        $userinfo->address = $request->get('address');
+        $userinfo->image = $url;
         // dd($user);
         // dd(1);
-        $save = $user->save();
+        $save = $userinfo->save();
         if ($save) {
-            $request->session()->flash('success', 'Tạo user thành công' . '<br>');
+            $request->session()->flash('success', 'Tạo userinfo thành công' . '<br>');
         } else {
-            $request->session()->flash('fail', 'Tạo user thất bại' . '<br>');
+            $request->session()->flash('fail', 'Tạo userinfo thất bại' . '<br>');
         }
 
-        return redirect()->route('backend.user.index');
+        return redirect()->route('backend.userinfo.index');
     }
     /**
      * Display the specified resource.
@@ -101,17 +101,7 @@ class UserController extends Controller
 
     public function show($id)
     {
-        // $user = User::find($id);
-        // $userInfo = $user->userInfo;
-        // dd($userInfo);
-
-        // $userInfo = UserInfo::find($id);
-        // $user = $userInfo->user;
-        // dd($user);
-        $user = User::find($id);
-        return view('backend.users.show')->with([
-            'user' => $user,
-    ]);
+        return view('backend.userinfo.show')->with('userinfo', $userinfo);
     }
 
     /**
@@ -122,8 +112,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('backend.users.edit')->with('user', $user);
+        $userinfo = UserInfor::find($id);
+        return view('backend.userinfo.edit')->with('userinfo', $userinfo);
     }
     /**
      * Update the specified resource in storage.
@@ -145,8 +135,8 @@ class UserController extends Controller
 
 //                cach2
                 $namefile = $image->getClientOriginalName();
-                $url = 'storage/user/' . $namefile;
-                Storage::disk('public')->putFileAs('user', $image, $namefile);
+                $url = 'storage/userinfo/' . $namefile;
+                Storage::disk('public')->putFileAs('userinfo', $image, $namefile);
                 $info_image[] = [
                     'url' => $url,
                     'name' => $namefile
@@ -154,27 +144,29 @@ class UserController extends Controller
             }
         }
 
-        $name = $request->get('name');
+        $fullname = $request->get('fullname');
         $email = $request->get('email');
-        // $is_admin = $request->get('is_admin');
+        $phone = $request->get('phone');
+        $address = $request->get('address');
         $image = $request->get('image');
 
-        $user = User::find($id);
-        $user->name = $name;
-        $user->email = $email;
-        // $user->is_admin = $is_admin;
-        $user->image = $image;
+        $userinfo = UserInfor::find($id);
+        $userinfo->fullname = $fullname;
+        $userinfo->email = $email;
+        $userinfo->phone = $phone;
+        $userinfo->address = $address;
+        $userinfo->image = $image;
         // dd($user);
         // dd(1);
 
-        $save = $user->save();
+        $save = $userinfo->save();
 
         if ($save) {
-            $request->session()->flash('success_update', 'Cập nhật user thành công' . '<br>');
+            $request->session()->flash('success_update', 'Cập nhật userinfo thành công' . '<br>');
         } else {
-            $request->session()->flash('fail_update', 'Cập nhật user thất bại' . '<br>');
+            $request->session()->flash('fail_update', 'Cập nhật userinfo thất bại' . '<br>');
         }
-        return redirect()->route('backend.user.index');
+        return redirect()->route('backend.userinfo.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -184,7 +176,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect()->route('backend.user.index');
+        UserInfo::destroy($id);
+        return redirect()->route('backend.userinfo.index');
     }
 }

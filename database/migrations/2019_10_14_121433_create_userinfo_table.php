@@ -15,7 +15,6 @@ class CreateUserinfoTable extends Migration
     {
         Schema::create('userinfo', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
             $table->string('fullname')->nullable();
             $table->string('address')->nullable();
             $table->timestamps();

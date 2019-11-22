@@ -5,12 +5,12 @@
 	<div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Tạo người dùng</h1>
+                <h1 class="m-0 text-dark">Tạo khách hàng</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Người dùng</a></li>
+                    <li class="breadcrumb-item"><a href="#">khách hàng</a></li>
                     <li class="breadcrumb-item active">Tạo mới</li>
                 </ol>
             </div><!-- /.col -->
@@ -43,11 +43,11 @@
                 <!-- general form elements -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tạo mới người dùng</h3>
+                        <h3 class="card-title">Tạo mới khách hàng</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{ route('backend.user.store') }}" enctype="multipart/form-data">
+                    <form role="form" method="post" action="{{ route('backend.userinfo.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             @if ($errors->any())
@@ -63,7 +63,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên</label>
-                                <input type="text" name="name" class="form-control" id="" placeholder="Tên người dùng">
+                                <input type="text" name="fullname" class="form-control" id="" placeholder="Tên khách hàng">
                                 @if($errors->has('name'))
                                     <div class="alert alert-danger">sai roi</div>
                                     <div class="alert alert-danger">{{ $errors->first('name') }}</div>
@@ -74,19 +74,23 @@
                                 <input type="email" name="email" class="form-control" id="" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Mật khẩu</label>
-                                <input type="password" name="password" class="form-control" id="">
+                                <label for="exampleInputEmail1">Số điện thoại</label>
+                                <input type="number" name="phone" class="form-control" id="" placeholder="Số điện thoại khách hàng">
+                                @if($errors->has('name'))
+                                    <div class="alert alert-danger">sai roi</div>
+                                    <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <label>Quyền</label>
-                                <select name="is_admin" class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn quyền---</option>
-                                    <option value="1">Admin</option>
-                                    <option value="0">User</option>
-                                </select>
+                                <label for="exampleInputEmail1">Địa chỉ</label>
+                                <input type="text" name="address" class="form-control" id="" placeholder="Địa chỉ khách hàng">
+                                @if($errors->has('name'))
+                                    <div class="alert alert-danger">sai roi</div>
+                                    <div class="alert alert-danger">{{ $errors->first('name') }}</div>
+                                @endif
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Hình ảnh người dùng</label>
+                                <label for="exampleInputFile">Hình ảnh khách hàng</label>
                                 <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="exampleInputFile" name="image[]">
@@ -101,7 +105,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <a href="{{ route('backend.user.index') }}" class="btn btn-default">Huỷ bỏ</a>
+                            <a href="{{ route('backend.userinfo.index') }}" class="btn btn-default">Huỷ bỏ</a>
                             <button type="submit" class="btn btn-success">Tạo mới</button>
                         </div>
                     </form>

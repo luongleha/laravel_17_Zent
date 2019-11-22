@@ -36,5 +36,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view-dashboard', function ($user){
             return $user->is_admin == 1;
         });
+        Gate::define('view-online', function ($user){
+            return $user->is_admin == 0;
+        });
     }
 }

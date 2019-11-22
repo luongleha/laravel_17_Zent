@@ -94,7 +94,7 @@
                             <i class="fas fa-user-tie"></i>
                             &nbsp;
                             <p>
-                                Quản lý nhân sự
+                                Quản lý người dùng
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -113,7 +113,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview">
+                    {{-- <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tree"></i>
                             <p>
@@ -123,19 +123,19 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('backend.user.create') }}" class="nav-link">
+                                <a href="{{ route('backend.userinfo.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Tạo mới</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('backend.user.index') }}" class="nav-link">
+                                <a href="{{ route('backend.userinfo.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách</p>
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

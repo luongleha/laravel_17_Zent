@@ -27,11 +27,12 @@
                 <p>Id: {{$product->id}}</p>
                 <p>Tên sản phẩm: {{$product->name}}</p>
                 <p>Danh mục sản phẩm: {{$category->name}}</p>
-                <p>Giá gốc: {{$product->origin_price}}</p>
-                <p>Giá bán: {{$product->sale_price}}</p>
-                <p>Trạng thái: @if($product->status == -1) Đang nhập @endif
-                    @if($product->status == 0)  Mở bán @endif
-                    @if($product->status == 1) Hết hàng @endif
+                <p>Giá gốc: {{number_format($product->origin_price) . ' VND'}}</p>
+                <p>Giá bán: {{number_format($product->sale_price) . ' VND'}}</p>
+                <p>Trạng thái: 
+                    @if($product->status == 0) Đang nhập @endif
+                    @if($product->status == 1)  Mở bán @endif
+                    @if($product->status == -1) Hết hàng @endif
                 </p>
                 </h3>
             </div>

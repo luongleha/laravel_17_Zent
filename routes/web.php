@@ -27,6 +27,16 @@
 	       	Route::put('/{id}', 'UserController@update')->name('backend.user.update');
 	       	Route::delete('/destroy/{id}', 'UserController@destroy')->name('backend.user.destroy');
 	    });
+	    //Quản lý khách hàng
+	    Route::group(['prefix' => 'userinfo'], function(){
+	        Route::get('/', 'UserInfoController@index')->name('backend.userinfo.index');
+	        Route::get('/show/{id?}', 'UserInfoController@show')->name('backend.userinfo.show');
+	        Route::get('/create', 'UserInfoController@create')->name('backend.userinfo.create');
+	        Route::post('/', 'UserInfoController@store')->name('backend.userinfo.store');
+	        Route::get('/edit/{id}', 'UserInfoController@edit')->name('backend.userinfo.edit');
+	       	Route::put('/{id}', 'UserInfoController@update')->name('backend.userinfo.update');
+	       	Route::delete('/destroy/{id}', 'UserInfoController@destroy')->name('backend.userinfo.destroy');
+	    });
 	    //Quản lý danh mục sản phẩm
 	    Route::group(['prefix' => 'categories'], function(){
 	        Route::get('/', 'CategoryController@index')->name('backend.categories.index');

@@ -27,7 +27,7 @@
                 <!-- general form elements -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tạo danh mục sản phẩm</h3>
+                        <h3 class="card-title">Cập nhật danh mục sản phẩm</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->

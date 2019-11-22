@@ -17,7 +17,8 @@ class UsersTableSeeder extends Seeder
                 // 'user_id' => $faker->text(11),
                 'name' => $faker->name,
                 'email' => $faker->email,
-                'password' => bcrypt('123456'),
+                'password' => bcrypt('12345678'),
+                'image' => $faker->image,
                 'created_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => \Carbon\Carbon::now()->format('Y-m-d H:i:s'),
             ]);
